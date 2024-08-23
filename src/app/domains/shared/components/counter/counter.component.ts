@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './counter.component.css'
 })
 export class CounterComponent {
-  @Input({required:true}) duration: number = 0;
-  @Input({required:true}) message: string = '';
+  @Input({required: true}) duration: number = 0;
+  @Input({required: true}) message: string = '';
   counter = signal(0);
   counterRef: number | undefined;
 
