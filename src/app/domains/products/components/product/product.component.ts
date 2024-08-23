@@ -7,7 +7,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
   //Uso de imputs en Angular
@@ -18,6 +17,6 @@ export class ProductComponent {
 
   addToCartHandler(){
     console.log("click desde el hijo");
-    this.addToCart.emit("este es un mensaje desde product Component");
+    this.addToCart.emit(this.product);
   }
 }

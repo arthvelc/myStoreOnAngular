@@ -10,7 +10,6 @@ import WaveSurfer from 'wavesurfer.js'
   standalone: true,
   imports: [ ],
   templateUrl: './wave-audio.component.html',
-
 })
 export class WaveAudioComponent {
 
