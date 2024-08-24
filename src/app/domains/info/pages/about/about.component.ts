@@ -9,7 +9,6 @@ import { WaveAudioComponent } from '../../components/wave-audio/wave-audio.compo
   standalone: true,
   imports: [CommonModule, CounterComponent, WaveAudioComponent],
   templateUrl: './about.component.html',
-
 })
 export class AboutComponent {
   duration = signal(1000);

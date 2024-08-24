@@ -23,11 +23,13 @@ export class ListComponent {
   ngOnInit(): void {
     //vamos a obtener el metodo getProducts() dado que el servicio se injectó en este componente.
     
-    this.productService.getProducts().subscribe((products) => {
-      this.products.set(products);
-      console.log(products);
-    }, (error) =>{
-      console.error(error);
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products.set(products);
+      },
+      error: (error) => {
+        console.error(error);
+      }
     });
   }
 
