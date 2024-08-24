@@ -88,7 +88,7 @@
 
   <div class="grid 1 gap-4 md:grid-cols-1 lg:grid-cols-3 mt-6" *ngFor="let product of cart()">
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-      <img class="w-full h-48 object-cover" [src]="product.image" alt="product">
+      <img class="w-full h-48 object-cover" [src]="product.images[0]" alt="product">
       <div class="p-4">
         <p class="text-lg font-semibold text-gray-800">{{product.title}}</p>
         <p class="text-gray-600">{{product.price}}</p>

@@ -4,6 +4,8 @@ import { Product } from '../../../shared/models/product.model';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../../shared/components/header/header.component";
 import { CartService } from '../../../shared/services/cart.service';
+import { ProductService } from '../../../shared/services/product.service';
+import { error } from 'console';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -14,59 +16,22 @@ export class ListComponent {
 
   products = signal<Product[]>([]);
   private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-  constructor(){
-    const initProducts: Product[] = [
-      {
-        id: Date.now(),
-        title: 'Producto 1',
-        price: 12000,
-        image: 'https://picsum.photos/250/250?r=23',
-        creationAt: new Date().toString()
-      },
-      {
-        id: Date.now(),
-        title: 'Producto 2',
-        price: 12000,
-        image: 'https://picsum.photos/250/250?r=24',
-        creationAt: new Date().toString()
-      },
-      {
-        id: Date.now(),
-        title: 'Producto 1',
-        price: 12000,
-        image: 'https://picsum.photos/250/250?r=25',
-        creationAt: new Date().toString()
-      },
-      {
-        id: Date.now(),
-        title: 'Producto 1',
-        price: 12000,
-        image: 'https://picsum.photos/250/250?r=23',
-        creationAt: new Date().toString()
-      },
-      {
-        id: Date.now(),
-        title: 'Producto 2',
-        price: 12000,
-        image: 'https://picsum.photos/250/250?r=24',
-        creationAt: new Date().toString()
-      },
-      {
-        id: Date.now(),
-        title: 'Producto 1',
-        price: 12000,
-        image: 'https://picsum.photos/250/250?r=25',
-        creationAt: new Date().toString()
-      },
+  constructor(){}
 
-    ];
-
-    this.products.set(initProducts)
+  ngOnInit(): void {
+    //vamos a obtener el metodo getProducts() dado que el servicio se injectó en este componente.
+    
+    this.productService.getProducts().subscribe((products) => {
+      this.products.set(products);
+      console.log(products);
+    }, (error) =>{
+      console.error(error);
+    });
   }
 
   addToCart(product: Product) {
     this.cartService.addToCard(product);
   }
-
 }
