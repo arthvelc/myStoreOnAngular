@@ -1,0 +1,15 @@
+<app-navbar/>
+<div class="flex flex-col items-center my-28">
+    <input class="w-48 p-2 border border-gray-300 rounded"
+    type="number" 
+    [value]="duration()" 
+    (change)="changeDuration($event)">
+    <input class="w-48 p-2 mt-2 border border-gray-300 rounded"
+    type="text" 
+    [value]="message()"
+    (change)="changeMessage($event)">
+
+    <app-counter [duration]="duration()" [message]="message()" class="mt-4" *ngIf="duration() > 0"/>
+</div>
+<app-footer/>
+
