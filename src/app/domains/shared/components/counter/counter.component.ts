@@ -37,6 +37,13 @@ export class CounterComponent {
     console.log('El componente CounterComponent ha cambiado');
     console.log(changes);
     console.log('-->'.repeat(20));
+
+    //sirve tambien para detectar cambios en las propiedades de un componente y hacer algo en base a esos cambios, esto se puede atar a una logica de negocio o una validacion
+    const duration = changes['duration'];
+    if (duration && duration.currentValue !== duration.previousValue) {
+      console.log('El valor de duration ha cambiado');
+      this.doShomething();
+    }
   }
 
   // ngOnInit sirve para inicializar el componente y se ejecuta una sola vez después del constructor, aqui se pueden hacer peticiones http y suscribirse a eventos
@@ -57,5 +64,9 @@ export class CounterComponent {
   ngOnDestroy(): void {
     console.log('El componente CounterComponent ha sido destruido');
     console.log('-->'.repeat(20));
+  }
+
+  doShomething(): void {
+    console.log("Me ejecuto porque el valor de duration ha cambiado");
   }
 }
