@@ -1,1 +1,19 @@
-<div #wave> </div>
+<div class="flex flex-col items-center justify-center space-y-4 p-4">
+    <div #wave class="w-full h-32 bg-gray-200 rounded-lg"></div>
+  
+    <button type="button" 
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+            (click)="playPause()">
+      <!-- Mostrar triángulo (Play) cuando no está reproduciendo -->
+      <svg *ngIf="!isplaying()" class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M4.5 3.5l11 6.5-11 6.5v-13z" />
+      </svg>
+  
+      <!-- Mostrar barras (Pause) cuando está reproduciendo -->
+      <svg *ngIf="isplaying()" class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M5 4h3v12H5V4zM12 4h3v12h-3V4z" />
+      </svg>
+  
+      <span class="sr-only">Icon description</span>
+    </button>
+  </div>

@@ -1,27 +1,46 @@
-import { Component, Input, ViewChild, ElementRef} from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, signal } from '@angular/core';
 import WaveSurfer from 'wavesurfer.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-wave-audio',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './wave-audio.component.html',
 })
-export class WaveAudioComponent {
-  @Input() url!: string;
-  @ViewChild('wave') wave!: ElementRef;
+export class WaveAudioComponent implements AfterViewInit {
+  @Input({required: true}) url!: string;
+  @ViewChild('wave', { static: false }) wave!: ElementRef;
+  private ws!: WaveSurfer;
+  isplaying = signal(false);
 
-
+  wavesurfer!: WaveSurfer;
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    const wavesurfer = WaveSurfer.create({
-      url: 'https://wavesurfer-js.org/example/media/demo.wav',
-      container: this.wave.nativeElement,
-      waveColor: 'violet',
-      progressColor: 'purple'
-    });
+    if (this.wave && this.wave.nativeElement) {
+      this.wavesurfer = WaveSurfer.create({
+        container: this.wave.nativeElement,
+        waveColor: 'violet',
+        progressColor: 'purple'
+      });
+
+      // Cargar el archivo de audio una vez que WaveSurfer esté inicializado
+      this.wavesurfer.load(this.url);
+
+      // Escuchar eventos de reproducción y pausa
+      this.wavesurfer.on('play', () => {
+        this.isplaying.set(true);  // Establece estado a true cuando se reproduce
+      });
+
+      this.wavesurfer.on('pause', () => {
+        this.isplaying.set(false);  // Establece estado a false cuando se pausa
+      });
+    } else {
+      console.error('Elemento de WaveSurfer no encontrado.');
+    }
   }
 
+  playPause(): void {
+    this.wavesurfer.playPause();
+  }
 }

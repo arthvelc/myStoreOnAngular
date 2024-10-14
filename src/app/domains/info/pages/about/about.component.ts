@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CounterComponent } from '../../../shared/components/counter/counter.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
+import { WaveAudioComponent } from '../../components/wave-audio/wave-audio.component';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CounterComponent, NavbarComponent, FooterComponent, CommonModule],
+  imports: [CounterComponent, NavbarComponent, FooterComponent, CommonModule, WaveAudioComponent],
   templateUrl: './about.component.html',
 })
 export class AboutComponent {
