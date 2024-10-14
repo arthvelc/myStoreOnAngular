@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { Product } from '../../../shared/models/product.model';
 
 
 @Component({
@@ -10,11 +11,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductComponent {
   // Inputs
-  @Input({required: true}) img!: string;
-  @Input({required: true}) title!: string;
-  @Input({required: true}) description!: string;
-  @Input({required: true}) price!: number;
-  @Input({required: true}) stock!: number ;
+  @Input({required: true}) product!: Product;
   // Outputs
   @Output() addToCart = new EventEmitter();
 
@@ -22,7 +19,7 @@ export class ProductComponent {
 
   addToCartHandler() {
     console.log("Se hizo click en el botón de agregar al carrito");
-    this.addToCart.emit("se agregó:" + this.title);
+    this.addToCart.emit("se agregó:" + this.product.name);
   }
-  
+
 }
