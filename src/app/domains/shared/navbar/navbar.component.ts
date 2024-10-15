@@ -1,6 +1,7 @@
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../models/product.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,13 +11,11 @@ import { Product } from '../models/product.model';
 })
 export class NavbarComponent {
   isSidebarOpen = signal(false);
-  @Input({ required: true }) cart: Product[] = [];
-  
+  private cartService = inject(CartService);
+  cart = this.cartService.cart;
+  cartTotal = this.cartService.cartTotal;
+
   toggleSidebar(): void {
     this.isSidebarOpen.update((isOpen) => !isOpen);
-  }
-  
-  getCartTotal(): number {
-    return this.cart.reduce((total, product) => total + product.price, 0);
   }
 }

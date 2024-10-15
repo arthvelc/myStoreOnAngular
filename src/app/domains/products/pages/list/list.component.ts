@@ -1,9 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
 import { Product } from '../../../shared/models/product.model';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../shared/services/cart.service';
+import { ProductService } from '../../../shared/services/product.service';
 
 @Component({
   selector: 'app-list',
@@ -15,39 +17,26 @@ export class ListComponent {
   //esta es una lista basada en el modelo de productos para lo que aparecen en la pagina
   products = signal<Product[]>([]);
   //esta es una lista basada en el model de productos para lo que se agrega al carrito de compras
-  cart = signal<Product[]>([]);
-  
-  constructor() {
-    const initProducts: Product[]= [
-      {
-        id: 1,
-        name: 'Producto 1',
-        price: 100,
-        description: 'Este es el producto 1',
-        imageUrl: 'https://via.placeholder.com/150'
-      },
-      {
-        id: 2,
-        name: 'Producto 2',
-        price: 200,
-        description: 'Este es el producto 2',
-        imageUrl: 'https://via.placeholder.com/150'
-      },
-      {
-        id: 3,
-        name: 'Producto 3',
-        price: 300,
-        description: 'Este es el producto 3',
-        imageUrl: 'https://via.placeholder.com/150'
-      }
-    ]
+  private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-    this.products.update(() => initProducts);
+  ngOnInit(): void {
+    //cuando se inicialice el componente se obtendran los productos de la api
+    this.productService.getAllProducts().subscribe({
+      //cuando son obtenidos se actualizara la lista de productos se utiliza como si fuera una promesa pero es un observable
+      next: (products) => {
+        this.products.set(products);
+      },
+      //en caso de error se mostrara en consola
+      error: (error) => console.error('Error al obtener los productos: ', error
+      )
+    })
+    
   }
-
+  
   addToCart(product: Product): void {
-    this.cart.update((prevState) => [...prevState, product]);
-    console.log('Se agregó al carrito el producto:', product.name);
+    this.cartService.addProductToCart(product);
+    console.log('Se agregó al carrito el producto:  ', product.title);
   }
 }
 
