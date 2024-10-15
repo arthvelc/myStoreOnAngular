@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
@@ -12,8 +12,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './list.component.html',
 })
 export class ListComponent {
-
-  products!: Product[];
+  //esta es una lista basada en el modelo de productos para lo que aparecen en la pagina
+  products = signal<Product[]>([]);
+  //esta es una lista basada en el model de productos para lo que se agrega al carrito de compras
+  cart = signal<Product[]>([]);
   
   constructor() {
     const initProducts: Product[]= [
@@ -40,12 +42,12 @@ export class ListComponent {
       }
     ]
 
-    this.products = initProducts;
+    this.products.update(() => initProducts);
   }
 
-  onAddToCart(event: String) {
-    console.log("Se hizo click en el botón de agregar al carrito desde la plantilla de list.component.html");
-    console.log("se ejecutó el siguiente evento: " + event);
+  addToCart(product: Product): void {
+    this.cart.update((prevState) => [...prevState, product]);
+    console.log('Se agregó al carrito el producto:', product.name);
   }
 }
 

@@ -1,10 +1,14 @@
-<app-navbar/>
-<main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center m-8">
-  <app-product
-    *ngFor="let product of products"
-    [product]="product"
-    (addToCart)="onAddToCart($event)"
-  ></app-product>
-</main>
+<app-navbar [cart]="cart()"/>
+
+<div class = "container mx-auto">
+  <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center m-8">
+    <app-product
+      *ngFor="let product of products()"
+      [product]="product"
+      (addToCart)="addToCart($event)"
+    ></app-product>
+  </main>
+</div>
+
 <app-footer/>
 

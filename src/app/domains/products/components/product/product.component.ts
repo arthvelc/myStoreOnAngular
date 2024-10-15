@@ -19,7 +19,7 @@ export class ProductComponent {
 
   addToCartHandler() {
     console.log("Se hizo click en el botón de agregar al carrito");
-    this.addToCart.emit("se agregó:" + this.product.name);
+    this.addToCart.emit(this.product);
   }
 
 }
