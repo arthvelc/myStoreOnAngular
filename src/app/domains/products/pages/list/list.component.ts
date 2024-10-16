@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import { ProductComponent } from '../../components/product/product.component';
-import { NavbarComponent } from '../../../shared/navbar/navbar.component';
-import { FooterComponent } from '../../../shared/footer/footer.component';
-import { Product } from '../../../shared/models/product.model';
+import { ProductComponent } from '@products/components/product/product.component';
+import { NavbarComponent } from '@shared/navbar/navbar.component';
+import { FooterComponent } from '@shared/footer/footer.component';
+import { Product } from '@shared/models/product.model';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../../shared/services/cart.service';
-import { ProductService } from '../../../shared/services/product.service';
+import { CartService } from '@shared/services/cart.service';
+import { ProductService } from '@shared/services/product.service';
 
 @Component({
   selector: 'app-list',
@@ -33,7 +33,7 @@ export class ListComponent {
     })
     
   }
-  
+
   addToCart(product: Product): void {
     this.cartService.addProductToCart(product);
     console.log('Se agregó al carrito el producto:  ', product.title);
