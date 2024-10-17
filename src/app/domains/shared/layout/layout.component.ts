@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '@shared/navbar/navbar.component';
 import { FooterComponent } from '@shared/footer/footer.component';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-not-found',
+  selector: 'app-layout',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink],
-  templateUrl: './not-found.component.html',
+  imports: [NavbarComponent, FooterComponent, RouterModule],
+  templateUrl: './layout.component.html',
 })
-export class NotFoundComponent {
+export class LayoutComponent {
 
 }

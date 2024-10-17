@@ -1,12 +1,12 @@
 import { Component, computed, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product } from '@shared/models/product.model';
 import { CartService } from '@shared/services/cart.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
