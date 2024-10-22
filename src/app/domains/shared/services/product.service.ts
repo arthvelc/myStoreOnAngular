@@ -8,15 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductService {
 
-  url: string = 'https://api.escuelajs.co/api/v1/products';
+  productUrl: string = 'https://api.escuelajs.co/api/v1/products';
 
   constructor(private http: HttpClient) {}
 
   getAllProducts() {
-    return this.http.get<Product[]>(this.url);
+    return this.http.get<Product[]>(this.productUrl);
   }
 
   getProductById(id: number) {
-    return this.http.get<Product>(`${this.url}/${id}`);
+    return this.http.get<Product>(`${this.productUrl}/${id}`);
   }
 }
