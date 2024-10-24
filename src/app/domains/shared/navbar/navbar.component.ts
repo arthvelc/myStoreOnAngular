@@ -11,11 +11,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavbarComponent {
   isSidebarOpen = signal(false);
+  isMobileMenuOpen = signal(false);
   private cartService = inject(CartService);
   cart = this.cartService.cart;
   cartTotal = this.cartService.cartTotal;
 
   toggleSidebar(): void {
     this.isSidebarOpen.update((isOpen) => !isOpen);
+  }
+
+  toggleMobileMenu(): void{
+    this.isMobileMenuOpen.update((isOpen)=>!isOpen);
   }
 }

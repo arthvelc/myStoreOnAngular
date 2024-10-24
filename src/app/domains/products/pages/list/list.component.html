@@ -1,6 +1,6 @@
-
-<div class = "container mx-auto flex flex-row">
-  <div class="flex space-x-4 mt-16">
+<div class="container mx-auto flex flex-row">
+  <!-- Sidebar: Visible solo en pantallas medianas o más grandes -->
+  <div class="hidden md:block space-x-4 mt-16">
     <ul>
       @for (category of categories(); track category) {
         <li>
@@ -10,12 +10,13 @@
     </ul>
   </div>
 
+  <!-- Contenido principal con productos -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center m-8">
     @for (product of products(); track product) {
       <app-product
         [product]="product"
         (addToCart)="addToCart($event)"
-        />
+      />
     }
   </div>
 </div>
