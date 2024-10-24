@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{K as o,Ta as a,Vb as e}from"./chunk-K2OTAPWY.mjs";var i=class r{cart=a([]);cartTotal=e(()=>this.cart().reduce((t,d)=>t+d.price,0));constructor(){}addProductToCart(c){this.cart.update(t=>[...t,c]),console.log("Actualizaci\xF3n del carrito de compras: ",this.cart())}static \u0275fac=function(t){return new(t||r)};static \u0275prov=o({token:r,factory:r.\u0275fac,providedIn:"root"})};export{i as a};
