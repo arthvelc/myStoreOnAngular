@@ -1,9 +1,10 @@
-import { Component, inject, Input, OnInit, signal,  } from '@angular/core';
+import { Component, inject, Input, OnInit, Sanitizer, signal,  } from '@angular/core';
 import { Product } from '@shared/models/product.model';
 import { ProductService } from '@shared/services/product.service';
 import { CurrencyPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { CartService } from '@shared/services/cart.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -12,9 +13,10 @@ import { CartService } from '@shared/services/cart.service';
   imports: [CurrencyPipe, CommonModule],
   templateUrl: './product-detail.component.html',
 })
-export class ProductDetailComponent implements OnInit {
+export default class ProductDetailComponent implements OnInit {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  private sanitizer = inject(DomSanitizer);
 
   product = signal<Product | null>(null);
   coverImage = signal<string>('');
@@ -48,5 +50,9 @@ export class ProductDetailComponent implements OnInit {
       this.cartService.addProductToCart(product);
       console.log('Se agregó al carrito el producto:  ', product.title);
     }
+  }
+
+  getSafeUrl(imageUrl: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
   }
 }

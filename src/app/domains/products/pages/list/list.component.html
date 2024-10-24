@@ -2,17 +2,20 @@
 <div class = "container mx-auto flex flex-row">
   <div class="flex space-x-4 mt-16">
     <ul>
-      <li *ngFor="let category of categories()">
-        <a class="cursor-pointer hover:underline">{{ category.name }}</a>
-      </li>
+      @for (category of categories(); track category) {
+        <li>
+          <a class="cursor-pointer hover:underline">{{ category.name }}</a>
+        </li>
+      }
     </ul>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center m-8">
-    <app-product
-      *ngFor="let product of products()"
-      [product]="product"
-      (addToCart)="addToCart($event)"
-    />
+    @for (product of products(); track product) {
+      <app-product
+        [product]="product"
+        (addToCart)="addToCart($event)"
+        />
+    }
   </div>
 </div>

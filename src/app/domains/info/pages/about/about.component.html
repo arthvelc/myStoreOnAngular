@@ -1,12 +1,14 @@
 
 <div class="flex flex-col items-center my-28">
-    <h2></h2>
-    <span class="text-4xl font-bold text-gray-800">Bienvenido a MyStore</span>
-    <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl">
-        MyStore es tu tienda en línea de confianza para encontrar los mejores productos de metal. 
-        Ofrecemos una amplia gama de artículos de alta calidad, desde música hasta accesorios, 
-        todo en un solo lugar. ¡Explora y disfruta de nuestras ofertas exclusivas!
-    </p>
-    <app-wave-audio url="assets/metalmusic.mp3"></app-wave-audio>
-    <app-counter [duration]="duration()" [message]="message()" class="mt-4" *ngIf="duration() > 0"/>
+  <h2></h2>
+  <span class="text-4xl font-bold text-gray-800">Bienvenido a MyStore</span>
+  <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl">
+    MyStore es tu tienda en línea de confianza para encontrar los mejores productos de metal.
+    Ofrecemos una amplia gama de artículos de alta calidad, desde música hasta accesorios,
+    todo en un solo lugar. ¡Explora y disfruta de nuestras ofertas exclusivas!
+  </p>
+  <app-wave-audio url="assets/metalmusic.mp3"></app-wave-audio>
+  @if (duration() > 0) {
+    <app-counter [duration]="duration()" [message]="message()" class="mt-4"/>
+  }
 </div>

@@ -16,12 +16,12 @@
  * @public
  */
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './counter.component.html',
 })
 export class CounterComponent {
